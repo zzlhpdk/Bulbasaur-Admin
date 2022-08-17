@@ -1,6 +1,6 @@
 <template>
   <div class="header-right" @click="toggleFullScreen">
-    <el-icon color="#fff" :size="40">
+    <el-icon class="el-icon" :size="40">
       <FullScreen />
     </el-icon>
   </div>
@@ -14,9 +14,8 @@
     <el-menu
       :ellipsis="false"
       mode="horizontal"
-      background-color="#06b799"
-      text-color="#fff"
-      active-text-color="#fff"
+      text-color="#06b799"
+      active-text-color="#06b799"
     >
       <el-sub-menu index="1">
         <template #title>{{ nickname }}</template>
@@ -28,29 +27,29 @@
   </div>
 </template>
 <script lang="ts" setup>
-import { userStore } from '@/store/user'
-import { computed } from 'vue'
-import { useRouter } from 'vue-router'
-import { getUserInfo, removeAll } from '@/utils/authority'
-import { ElMessage, ElMessageBox } from 'element-plus'
-import { FullScreen } from '@element-plus/icons-vue'
-const store = userStore()
-const userInfo: any = getUserInfo()
-const nickname = computed(() => store.userInfo.nickname || userInfo?.nickname)
-const avatar = computed(() => store.userInfo.avatar || userInfo?.avatar)
-const srcList = computed(() => [avatar.value])
+import { userStore } from '@/store/user';
+import { computed } from 'vue';
+import { useRouter } from 'vue-router';
+import { getUserInfo, removeAll } from '@/utils/authority';
+import { ElMessage, ElMessageBox } from 'element-plus';
+import { FullScreen } from '@element-plus/icons-vue';
+const store = userStore();
+const userInfo: any = getUserInfo();
+const nickname = computed(() => store.userInfo.nickname || userInfo?.nickname);
+const avatar = computed(() => store.userInfo.avatar || userInfo?.avatar);
+const srcList = computed(() => [avatar.value]);
 
-const router = useRouter()
+const router = useRouter();
 
 const toggleFullScreen = () => {
   if (!document.fullscreenElement) {
-    document.documentElement.requestFullscreen()
+    document.documentElement.requestFullscreen();
   } else {
     if (document.exitFullscreen) {
-      document.exitFullscreen()
+      document.exitFullscreen();
     }
   }
-}
+};
 const handleLoginOut = () => {
   ElMessageBox.confirm('确认退出?', '提示', {
     confirmButtonText: '确认',
@@ -61,26 +60,29 @@ const handleLoginOut = () => {
       ElMessage({
         type: 'success',
         message: '退出成功',
-      })
+      });
       //pinia 数据重置
-      store.$reset()
+      store.$reset();
       //清空session
-      removeAll()
-      router.push('/login')
+      removeAll();
+      router.push('/login');
     })
     .catch(() => {
       ElMessage({
         type: 'info',
         message: '您已取消退出',
-      })
-    })
-}
+      });
+    });
+};
 </script>
 <style lang="scss" scoped>
 .header-right {
   display: flex;
   align-items: center;
   justify-content: flex-end;
+  .el-icon {
+    color: $color;
+  }
 }
 .user-info {
   margin-left: 10px;
@@ -95,5 +97,8 @@ const handleLoginOut = () => {
 }
 ::v-deep(.el-menu--horizontal > .el-sub-menu.is-active .el-sub-menu__title) {
   border-bottom: none;
+}
+::v-deep(.el-sub-menu__title) {
+  font-size: 24px;
 }
 </style>

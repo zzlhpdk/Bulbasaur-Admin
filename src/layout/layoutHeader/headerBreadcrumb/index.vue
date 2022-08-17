@@ -1,11 +1,11 @@
 <script lang="ts" setup>
-import { ArrowRight } from '@element-plus/icons-vue'
-import { computed } from 'vue'
-import { useRouter } from 'vue-router'
-const router = useRouter()
+import { ArrowRight } from '@element-plus/icons-vue';
+import { computed } from 'vue';
+import { useRouter } from 'vue-router';
+const router = useRouter();
 const routes = computed(() => {
-  return router.currentRoute.value.matched.filter((item) => item.meta.title)
-})
+  return router.currentRoute.value.matched.filter((item) => item.meta.title);
+});
 </script>
 <template>
   <el-breadcrumb :separator-icon="ArrowRight" class="breadcrumb">
@@ -24,10 +24,10 @@ const routes = computed(() => {
   .breadcrumb-item {
     font-size: 18px;
     ::v-deep(.el-breadcrumb__inner) {
-      color: #fff;
+      color: #666;
     }
     ::v-deep(.el-breadcrumb__separator.el-icon) {
-      color: #fff;
+      color: #666;
     }
   }
   ::v-deep(.el-breadcrumb__item:last-child
@@ -35,7 +35,7 @@ const routes = computed(() => {
       .el-breadcrumb__inner:hover, .el-breadcrumb__item:last-child
       .el-breadcrumb__inner
       a, .el-breadcrumb__item:last-child .el-breadcrumb__inner a:hover) {
-    color: #fff;
+    color: $color;
   }
 }
 </style>

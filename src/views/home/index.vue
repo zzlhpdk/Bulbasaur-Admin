@@ -1,30 +1,16 @@
 <template>
-  <h1>首页</h1>
-  <el-button :plain="true" @click="open2">success</el-button>
-  <el-button :plain="true" @click="open3">warning</el-button>
-  <el-button :plain="true" @click="open1">message</el-button>
-  <el-button :plain="true" @click="open4">error</el-button>
+  <div class="home">
+    <img :src="home" />
+  </div>
 </template>
 
 <script lang="ts" setup>
-import { ElMessage } from 'element-plus'
-
-const open1 = () => {
-  ElMessage('this is a message.')
-}
-const open2 = () => {
-  ElMessage({
-    message: 'Congrats, this is a success message.',
-    type: 'success',
-  })
-}
-const open3 = () => {
-  ElMessage({
-    message: 'Warning, this is a warning message.',
-    type: 'warning',
-  })
-}
-const open4 = () => {
-  ElMessage.error('Oops, this is a error message.')
-}
+import home from '@/assets/home.svg';
 </script>
+
+<style lang="scss" scopde>
+.home {
+  width: 100%;
+  text-align: center;
+}
+</style>

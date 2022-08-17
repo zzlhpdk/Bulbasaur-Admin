@@ -1,7 +1,7 @@
 <template>
   <div class="logo" @click="redirectHome">
     <img src="@/assets/logo.png " />
-    <span v-show="!collapse">OVERWATCH</span>
+    <span v-show="!collapse">Bulbasaur</span>
   </div>
   <el-menu
     active-text-color="#fff"
@@ -23,32 +23,32 @@
   </el-menu>
 </template>
 <script lang="ts" setup>
-import sidebarItem from './components/sidebarItem/index.vue'
-import { layoutStore } from '@/store/layout'
-import { userStore } from '@/store/user'
-import { getUserInfo } from '@/utils/authority'
-import { useRouter } from 'vue-router' // useRouter实例对象，useRoute当前路由对象
-import { computed } from 'vue'
-import { setActiveState } from '@/utils/func'
+import sidebarItem from './components/sidebarItem/index.vue';
+import { layoutStore } from '@/store/layout';
+import { userStore } from '@/store/user';
+import { getUserInfo } from '@/utils/authority';
+import { useRouter } from 'vue-router'; // useRouter实例对象，useRoute当前路由对象
+import { computed } from 'vue';
+import { setActiveState } from '@/utils/func';
 
-const userInfo: any = getUserInfo()
-const router = useRouter()
-const user = userStore()
-const layout = layoutStore()
-const collapse = computed(() => layout.collapse) // 折叠
-const menuData = computed(() => user.userInfo.routes || userInfo?.routes) //菜单数据
-const defaultActive = computed(() => layout.defaultActive) // 选中状态
+const userInfo: any = getUserInfo();
+const router = useRouter();
+const user = userStore();
+const layout = layoutStore();
+const collapse = computed(() => layout.collapse); // 折叠
+const menuData = computed(() => user.userInfo.routes || userInfo?.routes); //菜单数据
+const defaultActive = computed(() => layout.defaultActive); // 选中状态
 
 // 点击logo,重定向首页
 const redirectHome = () => {
-  router.push('/home')
-  layout.setDefaultMenu('/home')
-}
+  router.push('/home');
+  layout.setDefaultMenu('/home');
+};
 
 // 选择菜单
 const select = (value: any) => {
-  setActiveState(value)
-}
+  setActiveState(value);
+};
 </script>
 
 <style lang="scss" scoped>
@@ -61,6 +61,8 @@ const select = (value: any) => {
   img {
     width: 37px;
     height: 37px;
+    border: 3px #fff solid;
+    border-radius: 50%;
   }
   span {
     font-size: 18px;

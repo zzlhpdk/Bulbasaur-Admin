@@ -53,7 +53,7 @@ const handleTabsEdit = (value: any, action: any) => {
 </script>
 <style lang="scss" scopde>
 .el-header {
-  background-color: $color;
+  background-color: #fff;
 }
 .el-footer {
   display: flex;

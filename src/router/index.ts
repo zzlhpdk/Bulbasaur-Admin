@@ -12,7 +12,7 @@ const routes: RouteRecordRaw[] = [
     name: 'overWatch',
     component: Layout,
     redirect: '/home',
-    meta: { title: '守望先锋管理系统' },
+    meta: { title: '妙蛙种子管理系统' },
     children: [
       {
         path: '/home',
@@ -51,7 +51,7 @@ router.beforeEach(async (to, from, next) => {
   const userInfo = getUserInfo()
   const componentRoutes = router.options.routes // 当前组件路由数量
   // 设置页面title
-  document.title = (to.meta.title as string) || '守望先锋管理系统'
+  document.title = (to.meta.title as string) || '妙蛙种子管理系统'
   // 没有登录
   if (!token) {
     // 如果去登录页，放行
