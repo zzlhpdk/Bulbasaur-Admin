@@ -1,0 +1,31 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "useDefineForClassFields": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "strict": true,
+    "jsx": "preserve",
+    "sourceMap": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "esModuleInterop": true,
+    "lib": ["esnext", "dom"],
+    "skipLibCheck": true /* 跳过类型检查所有.d.ts文件 */,
+    "baseUrl": "./", //设置默认路径
+    //识别@路径
+    "paths": {
+      "@/*": ["src/*"]
+    },
+    "types": ["element-plus/global"] //如果您使用 Volar，请在 tsconfig.json 中通过 compilerOptions.type 指定全局组件类型。
+  },
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.d.ts",
+    "src/**/*.tsx",
+    "src/**/*.vue",
+    "types",
+    "src/views/login/canvas.ts"
+  ],
+  "references": [{ "path": "./tsconfig.node.json" }]
+}
