@@ -1,7 +1,7 @@
 <template>
   <div class="logo" @click="redirectHome">
     <img src="@/assets/logo.png " />
-    <span v-show="!collapse">Bulbasaur</span>
+    <span v-show="!collapse">Bulbasaur-Admin</span>
   </div>
   <el-menu
     active-text-color="#fff"
@@ -26,17 +26,15 @@
 import sidebarItem from './components/sidebarItem/index.vue';
 import { layoutStore } from '@/store/layout';
 import { userStore } from '@/store/user';
-import { getUserInfo } from '@/utils/authority';
 import { useRouter } from 'vue-router'; // useRouter实例对象，useRoute当前路由对象
 import { computed } from 'vue';
 import { setActiveState } from '@/utils/func';
 
-const userInfo: any = getUserInfo();
 const router = useRouter();
 const user = userStore();
 const layout = layoutStore();
 const collapse = computed(() => layout.collapse); // 折叠
-const menuData = computed(() => user.userInfo.routes || userInfo?.routes); //菜单数据
+const menuData = computed(() => user.userInfo.routes); //菜单数据
 const defaultActive = computed(() => layout.defaultActive); // 选中状态
 
 // 点击logo,重定向首页
@@ -61,8 +59,7 @@ const select = (value: any) => {
   img {
     width: 37px;
     height: 37px;
-    border: 3px #fff solid;
-    border-radius: 50%;
+    margin-bottom: 10px;
   }
   span {
     font-size: 18px;
@@ -82,7 +79,7 @@ const select = (value: any) => {
   border: none;
 }
 .el-menu:not(.el-menu--collapse) {
-  width: 200px;
+  width: 260px;
   min-height: 400px;
 }
 </style>

@@ -1,37 +1,40 @@
 <template>
-  <!-- <div v-if="!item.hidden"> -->
-  <el-menu-item :index="item.path" v-if="!item.children">
-    <el-icon color="#fff" :size="18">
-      <component :is="item.meta.icon"></component>
-    </el-icon>
-    <template #title>{{ item.meta.title }}</template>
-  </el-menu-item>
-  <el-sub-menu :index="item.path" v-else>
-    <template #title>
+  <div v-if="item.meta.type !== 'button'">
+    <el-menu-item :index="item.path" v-if="!item.children">
       <el-icon color="#fff" :size="18">
         <component :is="item.meta.icon"></component>
       </el-icon>
-      <span>{{ item.meta.title }}</span>
-    </template>
-    <sidebarItem v-for="child in item.children" :key="child.path" :item="child">
-    </sidebarItem>
-  </el-sub-menu>
-  <!-- </div> -->
+      <template #title>{{ item.meta.title }}</template>
+    </el-menu-item>
+    <el-sub-menu :index="item.path" v-else>
+      <template #title>
+        <el-icon color="#fff" :size="18">
+          <component :is="item.meta.icon"></component>
+        </el-icon>
+        <span>{{ item.meta.title }}</span>
+      </template>
+      <sidebarItem
+        v-for="child in item.children"
+        :key="child.path"
+        :item="child"
+      >
+      </sidebarItem>
+    </el-sub-menu>
+  </div>
 </template>
+<script lang="ts">
+// 使用name 属性用于调用自身
+export default {
+  name: 'sidebarItem',
+};
+</script>
 <script lang="ts" setup>
-import { ref } from 'vue'
-import sidebarItem from './index.vue'
-
-const iconName = ref('')
-const showIcon = (name: string) => {
-  return '< name />'
-}
 const { item } = defineProps({
   item: {
     type: Object,
     required: true,
   },
-})
+});
 </script>
 
 <style lang="scss" scoped>

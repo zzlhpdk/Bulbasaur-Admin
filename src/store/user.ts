@@ -1,6 +1,4 @@
-import { defineStore } from 'pinia'
-import { setUserInfo, setToken } from '@/utils/authority'
-
+import { defineStore } from 'pinia';
 // 第一个参数是应用程序中 store 的唯一 id
 export const userStore: any = defineStore('USER', {
   state: () => {
@@ -13,20 +11,21 @@ export const userStore: any = defineStore('USER', {
         avatar: '',
       },
       token: '',
-    }
+    };
   },
   actions: {
     //将token存进state
     setToken(payload: any) {
-      this.token = payload
-      //并且进行持久储存，存进session里面
-      setToken(payload)
+      this.token = payload;
     },
     //将用户信息存进state
     setUser(payload: any) {
-      this.userInfo = payload
-      // 用户信息存入缓存
-      setUserInfo(payload)
+      this.userInfo = payload;
     },
   },
-})
+  // 持久化
+  persist: {
+    enabled: true,
+    strategies: [{ paths: ['userInfo', 'token'] }],
+  },
+});

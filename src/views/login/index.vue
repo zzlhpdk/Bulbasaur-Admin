@@ -18,7 +18,7 @@
       <el-form-item prop="code">
         <el-input
           v-model="user.code"
-          placeholder="请输入用户名"
+          placeholder="admin/other"
           :suffix-icon="Avatar"
         >
         </el-input>
@@ -27,7 +27,7 @@
         <el-input
           v-model="user.pwd"
           type="password"
-          placeholder="请输入密码"
+          placeholder="123456"
           :suffix-icon="Lock"
         >
         </el-input>
@@ -51,18 +51,17 @@ import { reactive, ref, onMounted } from 'vue';
 import { useRouter, useRoute } from 'vue-router'; // useRouter实例对象，useRoute当前路由对象
 import { Avatar, Lock } from '@element-plus/icons-vue';
 import type { FormInstance, FormRules } from 'element-plus';
-import { loginPath, userInfoPath } from '@/api/common';
+import { loginPath, userInfoPath } from '@/api/user';
 import { ElMessage } from 'element-plus';
 import { userStore } from '@/store/user';
-import { removeAll } from '@/utils/authority';
 
 const form = ref<FormInstance>();
 const router = useRouter();
 const route = useRoute();
 const store = userStore();
 const user = reactive({
-  code: '77jb',
-  pwd: 123456,
+  code: '',
+  pwd: '',
 });
 const loading = ref(false);
 const rules = ref<FormRules>({
@@ -73,7 +72,6 @@ const rules = ref<FormRules>({
 // 初始化清空缓存
 onMounted(() => {
   store.$reset();
-  removeAll();
 });
 const handleSubmit = async () => {
   await form.value?.validate(async (valid, fields) => {

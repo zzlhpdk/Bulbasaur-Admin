@@ -8,10 +8,5 @@
     ),
   )
 );
-
-
 // 导入所有样式:
 @use "element-plus/theme-chalk/src/index.scss" as *;
-
-
-@import 'normalize.css';//让不同的浏览器在渲染网页元素的时候形式更统一

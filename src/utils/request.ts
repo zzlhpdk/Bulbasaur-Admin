@@ -1,12 +1,7 @@
-import axios, {
-  AxiosInstance,
-  AxiosResponse,
-  AxiosRequestConfig,
-  AxiosError,
-} from 'axios';
-import { getToken } from '@/utils/authority';
+import axios from 'axios';
+import { userStore } from '@/store/user';
 import { ElMessage, ElMessageBox } from 'element-plus';
-import { useRoute, useRouter } from 'vue-router'; // useRouter实例对象，useRoute当前路由对象
+import { useRouter } from 'vue-router'; // useRouter实例对象，useRoute当前路由对象
 
 // const request: AxiosInstance = axios.create({
 const request = axios.create({
@@ -16,7 +11,7 @@ const request = axios.create({
 // 请求拦截器
 request.interceptors.request.use(
   function (config: any) {
-    const token = getToken();
+    const { token } = userStore();
     config.headers['token'] = token;
     return config;
   },

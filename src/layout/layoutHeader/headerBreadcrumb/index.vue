@@ -6,6 +6,7 @@ const router = useRouter();
 const routes = computed(() => {
   return router.currentRoute.value.matched.filter((item) => item.meta.title);
 });
+console.log(router);
 </script>
 <template>
   <el-breadcrumb :separator-icon="ArrowRight" class="breadcrumb">

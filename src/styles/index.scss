@@ -1,3 +1,4 @@
 @import './common.scss';//全局公共样式
-@import './variables.scss';//全局SCSS
+@import './variables.scss';//默认样式
+@import 'normalize.css';//让不同的浏览器在渲染网页元素的时候形式更统一
 

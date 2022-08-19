@@ -30,13 +30,11 @@
 import { userStore } from '@/store/user';
 import { computed } from 'vue';
 import { useRouter } from 'vue-router';
-import { getUserInfo, removeAll } from '@/utils/authority';
 import { ElMessage, ElMessageBox } from 'element-plus';
 import { FullScreen } from '@element-plus/icons-vue';
 const store = userStore();
-const userInfo: any = getUserInfo();
-const nickname = computed(() => store.userInfo.nickname || userInfo?.nickname);
-const avatar = computed(() => store.userInfo.avatar || userInfo?.avatar);
+const nickname = computed(() => store.userInfo.nickname);
+const avatar = computed(() => store.userInfo.avatar);
 const srcList = computed(() => [avatar.value]);
 
 const router = useRouter();
@@ -63,8 +61,7 @@ const handleLoginOut = () => {
       });
       //pinia 数据重置
       store.$reset();
-      //清空session
-      removeAll();
+
       router.push('/login');
     })
     .catch(() => {
