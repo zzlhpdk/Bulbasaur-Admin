@@ -1,12 +1,9 @@
 <script lang="ts" setup>
 import { ArrowRight } from '@element-plus/icons-vue';
 import { computed } from 'vue';
-import { useRouter } from 'vue-router';
-const router = useRouter();
-const routes = computed(() => {
-  return router.currentRoute.value.matched.filter((item) => item.meta.title);
-});
-console.log(router);
+import { useRoute } from 'vue-router';
+const route = useRoute();
+const routes = computed(() => route.matched);
 </script>
 <template>
   <el-breadcrumb :separator-icon="ArrowRight" class="breadcrumb">

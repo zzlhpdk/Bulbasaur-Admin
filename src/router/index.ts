@@ -15,7 +15,7 @@ const routes: RouteRecordRaw[] = [
     meta: { title: '妙蛙种子管理系统' },
     children: [
       {
-        path: '/home',
+        path: 'home',
         name: 'Home',
         component: () => import('@/views/home/index.vue'),
         meta: { title: '首页' },
@@ -23,7 +23,7 @@ const routes: RouteRecordRaw[] = [
       {
         path: '/:catchAll(.*)',
         name: 'noPermission',
-        meta: { title: '发生错误' },
+        meta: { title: '401' },
         component: () => import('@/views/error-page/401.vue'),
       },
     ],

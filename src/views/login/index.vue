@@ -60,8 +60,8 @@ const router = useRouter();
 const route = useRoute();
 const store = userStore();
 const user = reactive({
-  code: '',
-  pwd: '',
+  code: import.meta.env.NODE_ENV === 'production' ? '' : 'admin',
+  pwd: import.meta.env.NODE_ENV === 'production' ? '' : '123456',
 });
 const loading = ref(false);
 const rules = ref<FormRules>({

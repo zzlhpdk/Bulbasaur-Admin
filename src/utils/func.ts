@@ -24,15 +24,16 @@ export const cloneDeep = (data: any) => {
 // 路由处理  type ===catalogue 菜单目录  menu  菜单  button 按钮菜单
 export const routerFormat = (routers: any) => {
   const modules = import.meta.glob('../views/**/**.vue');
-  const newRoutes = routers.map((item: any) => {
+  routers.map((item: any) => {
     if (!item.children) {
       const route = {
         path: item.path,
         name: item.name,
         meta: item.meta,
-        component: item.component
-          ? modules[`../views${item.component}/index.vue`]
-          : RouterView,
+        component:
+          item.meta.type !== 'catalogue'
+            ? modules[`../views${item.component}/index.vue`]
+            : { render: (e: any) => e('router-view') },
       };
       // 生成路由组件
       router.addRoute('Bulbasaur', route);
@@ -42,7 +43,6 @@ export const routerFormat = (routers: any) => {
       routerFormat(item.children);
     }
   });
-  return newRoutes;
 };
 
 // 设置激活路由/标签 状态
