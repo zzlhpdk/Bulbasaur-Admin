@@ -1,12 +1,12 @@
 <template>
   <div v-if="item.meta.type !== 'button'">
-    <el-menu-item :index="item.path" v-if="!item.children">
+    <el-menu-item :index="`${path}/${item.path}`" v-if="!item.children">
       <el-icon color="#fff" :size="18">
         <component :is="item.meta.icon"></component>
       </el-icon>
       <template #title>{{ item.meta.title }}</template>
     </el-menu-item>
-    <el-sub-menu :index="item.path" v-else>
+    <el-sub-menu :index="`${path}/${item.path}`" v-else>
       <template #title>
         <el-icon color="#fff" :size="18">
           <component :is="item.meta.icon"></component>
@@ -15,8 +15,8 @@
       </template>
       <sidebarItem
         v-for="child in item.children"
-        :key="child.path"
         :item="child"
+        :path="`${path}/${item.path}`"
       >
       </sidebarItem>
     </el-sub-menu>
@@ -33,6 +33,9 @@ const { item } = defineProps({
   item: {
     type: Object,
     required: true,
+  },
+  path: {
+    type: String,
   },
 });
 </script>

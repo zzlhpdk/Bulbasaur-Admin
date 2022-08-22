@@ -9,9 +9,8 @@
     class="el-menu"
     :default-active="defaultActive"
     text-color="#fff"
-    router
     :collapse="collapse"
-    @select="select"
+    router
   >
     <el-menu-item index="/home">
       <el-icon color="#fff" :size="18">
@@ -19,7 +18,7 @@
       </el-icon>
       <template #title>首页</template>
     </el-menu-item>
-    <sidebarItem v-for="route in menuData" :key="route.path" :item="route" />
+    <sidebarItem v-for="route in menuData" :item="route" :path="''" />
   </el-menu>
 </template>
 <script lang="ts" setup>
@@ -28,7 +27,6 @@ import { layoutStore } from '@/store/layout';
 import { userStore } from '@/store/user';
 import { useRouter } from 'vue-router'; // useRouter实例对象，useRoute当前路由对象
 import { computed } from 'vue';
-import { setActiveState } from '@/utils/func';
 
 const router = useRouter();
 const user = userStore();
@@ -41,11 +39,6 @@ const defaultActive = computed(() => layout.defaultActive); // 选中状态
 const redirectHome = () => {
   router.push('/home');
   layout.setDefaultMenu('/home');
-};
-
-// 选择菜单
-const select = (value: any) => {
-  setActiveState(value);
 };
 </script>
 

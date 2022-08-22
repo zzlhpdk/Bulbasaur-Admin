@@ -32,26 +32,25 @@ import layoutSide from './layoutSide/index.vue';
 import layoutHeader from './layoutHeader/index.vue';
 import { computed, ref, watch } from 'vue';
 import { tabPaneStore } from '@/store/tabPane';
-import { setActiveState } from '@/utils/func';
 import { useRouter } from 'vue-router';
 
-let activePan: any = ref();
+// let activePan: any = ref();
 const store = tabPaneStore();
 const pansData = computed(() => store.tabPanes);
+const activePan = computed(() => store.activePan);
 
-watch(
-  () => store.activePan,
-  (newValue, oldValue) => {
-    activePan.value = newValue;
-  }
-);
+// watch(
+//   () => store.activePan,
+//   (newValue) => {
+//     activePan.value = newValue;
+//   }
+// );
 
 const router = useRouter();
 
 // 点击导航栏进入对应页面
 const tabClick = (value: any) => {
   router.push(value.paneName);
-  setActiveState(value.paneName);
 };
 // 删除标签
 const handleTabsEdit = (value: any, action: any) => {

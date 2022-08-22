@@ -22,31 +22,29 @@ export const cloneDeep = (data: any) => {
   return newData;
 };
 // 路由处理  type ===catalogue 菜单目录  menu  菜单  button 按钮菜单
-export const routerFormat = (routers: any) => {
+export const routerFormat = (routers: any, parentName = 'Bulbasaur') => {
   const modules = import.meta.glob('../views/**/**.vue');
-  routers.map((item: any) => {
-    if (!item.children) {
-      const route = {
-        path: item.path,
-        name: item.name,
-        meta: item.meta,
-        component:
-          item.meta.type !== 'catalogue'
-            ? modules[`../views${item.component}/index.vue`]
-            : { render: (e: any) => e('router-view') },
-      };
-      // 生成路由组件
-      router.addRoute('Bulbasaur', route);
-      //把路由组件加入router
-      router.options.routes.push(route);
-    } else {
-      routerFormat(item.children);
+  routers.forEach((item: any) => {
+    const route = {
+      ...item,
+      component:
+        item.meta.type !== 'catalogue'
+          ? modules[`../views${item.component}/index.vue`]
+          : RouterView,
+    };
+    // 路由表里添加路由  https://router.vuejs.org/zh/guide/essentials/nested-routes.html#%E5%B5%8C%E5%A5%97%E7%9A%84%E5%91%BD%E5%90%8D%E8%B7%AF%E7%94%B1
+    router.addRoute(parentName, route);
+    // 路由数量里添加路由，用于路由守卫根据路由数量判断是否重新加载路由
+    router.options.routes.push(route);
+    if (item.children) {
+      routerFormat(item.children, item.name);
     }
   });
 };
 
 // 设置激活路由/标签 状态
 export const setActiveState = (value: any) => {
+  console.log(value);
   const tabPane = tabPaneStore();
   const layout = layoutStore();
   layout.setDefaultMenu(value);

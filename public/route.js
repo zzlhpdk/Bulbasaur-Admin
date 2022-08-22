@@ -1,6 +1,6 @@
 let routes = [
   {
-    path: '/layer',
+    path: 'layer',
     name: 'Layer',
     meta: {
       title: '层级嵌套',
@@ -9,16 +9,16 @@ let routes = [
     },
     children: [
       {
-        path: '/layer/layer-1',
+        path: 'layer-1',
         name: 'Layer_1',
         meta: {
           title: '层级1',
           icon: 'Sort',
-          type: 'menu',
+          type: 'catalogue',
         },
         children: [
           {
-            path: '/layer/layer-1/layer1-1',
+            path: 'layer1-1',
             name: 'Layer_1_1',
             component: '/layer/layer-1/layer-1-1',
             meta: {
@@ -28,7 +28,7 @@ let routes = [
             },
           },
           {
-            path: '/layer/layer-1/layer1-2',
+            path: 'layer1-2',
             name: 'Layer_1_2',
             component: '/layer/layer-1/layer-1-2',
             meta: {
@@ -40,7 +40,7 @@ let routes = [
         ],
       },
       {
-        path: '/layer/layer-2',
+        path: 'layer-2',
         name: 'Layer_2',
         meta: {
           title: '层级2',
@@ -49,7 +49,7 @@ let routes = [
         },
         children: [
           {
-            path: '/layer/layer-2/layer2-1',
+            path: 'layer2-1',
             name: 'Layer_2_1',
             component: '/layer/layer-2/layer-2-1',
             meta: {
@@ -59,16 +59,16 @@ let routes = [
             },
           },
           {
-            path: '/layer/layer-2/layer2-2',
+            path: 'layer2-2',
             name: 'Layer_2_2',
             meta: {
               title: '层级2-2',
               icon: 'Sort',
-              type: 'menu',
+              type: 'catalogue',
             },
             children: [
               {
-                path: '/layer/layer-2/layer2-2/layer2-2-1',
+                path: 'layer2-2-1',
                 name: 'Layer_2_1_1',
                 component: '/layer/layer-2/layer-2-2/layer-2-2-1',
                 meta: {
@@ -78,7 +78,7 @@ let routes = [
                 },
               },
               {
-                path: '/layer/layer-2/layer2-2/layer2-2-2',
+                path: 'layer2-2-2',
                 name: 'Layer_2_2_2',
                 component: '/layer/layer-2/layer-2-2/layer-2-2-2',
                 meta: {
@@ -94,8 +94,8 @@ let routes = [
     ],
   },
   {
-    path: '/system',
-    name: 'system',
+    path: 'system',
+    name: 'System',
     meta: {
       title: '系统管理',
       icon: 'Setting',
@@ -103,7 +103,7 @@ let routes = [
     },
     children: [
       {
-        path: '/system/menu',
+        path: 'menu',
         name: 'Menu',
         component: '/system/menu',
         meta: {
