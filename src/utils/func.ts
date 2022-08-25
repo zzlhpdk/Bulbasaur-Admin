@@ -21,6 +21,7 @@ export const cloneDeep = (data: any) => {
   }
   return newData;
 };
+
 // 路由处理  type ===catalogue 菜单目录  menu  菜单  button 按钮菜单
 export const routerFormat = (routers: any, parentName = 'Bulbasaur') => {
   const modules = import.meta.glob('../views/**/**.vue');
@@ -44,9 +45,8 @@ export const routerFormat = (routers: any, parentName = 'Bulbasaur') => {
 
 // 设置激活路由/标签 状态
 export const setActiveState = (value: any) => {
-  console.log(value);
-  const tabPane = tabPaneStore();
-  const layout = layoutStore();
-  layout.setDefaultMenu(value);
-  tabPane.setActivePan(value);
+  const { setActivePan } = tabPaneStore();
+  const { setDefaultMenu } = layoutStore();
+  setActivePan(value);
+  setDefaultMenu(value);
 };

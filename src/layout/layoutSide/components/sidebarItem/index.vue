@@ -1,5 +1,6 @@
 <template>
   <div v-if="item.meta.type !== 'button'">
+    <!-- 子菜单index拼接父菜单index  用于点击跳转 -->
     <el-menu-item :index="`${path}/${item.path}`" v-if="!item.children">
       <el-icon color="#fff" :size="18">
         <component :is="item.meta.icon"></component>

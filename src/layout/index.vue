@@ -5,6 +5,8 @@
       <el-header class="el-header"><layoutHeader /></el-header>
       <!-- 子路由出口 -->
       <el-main>
+        <!-- 自定义属性customProp，用于绑定计算属性customProp的值，因为computed
+        触发条件是它的返回值要在template 里面 -->
         <el-tabs
           v-model="activePan"
           type="card"
@@ -12,6 +14,7 @@
           @tab-click="tabClick"
           closable
           @edit="handleTabsEdit"
+          :activePan="customProp"
         >
           <el-tab-pane
             v-for="item in pansData"
@@ -34,20 +37,13 @@ import { computed, ref, watch } from 'vue';
 import { tabPaneStore } from '@/store/tabPane';
 import { useRouter } from 'vue-router';
 
-// let activePan: any = ref();
+let activePan: any = ref();
 const store = tabPaneStore();
 const pansData = computed(() => store.tabPanes);
-const activePan = computed(() => store.activePan);
-
-// watch(
-//   () => store.activePan,
-//   (newValue) => {
-//     activePan.value = newValue;
-//   }
-// );
-
+const customProp: any = computed(() => {
+  activePan.value = store.activePan;
+});
 const router = useRouter();
-
 // 点击导航栏进入对应页面
 const tabClick = (value: any) => {
   router.push(value.paneName);

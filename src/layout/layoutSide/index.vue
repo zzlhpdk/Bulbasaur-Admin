@@ -7,9 +7,9 @@
     active-text-color="#fff"
     background-color="#06b799"
     class="el-menu"
-    :default-active="defaultActive"
     text-color="#fff"
     :collapse="collapse"
+    :default-active="defaultActive"
     router
   >
     <el-menu-item index="/home">
