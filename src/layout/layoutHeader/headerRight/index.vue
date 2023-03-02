@@ -9,14 +9,12 @@
       style="width: 40px; height: 40px"
       :src="avatar"
       :preview-src-list="srcList"
-      fit="cover"
-    />
+      fit="cover" />
     <el-menu
       :ellipsis="false"
       mode="horizontal"
       text-color="#06b799"
-      active-text-color="#06b799"
-    >
+      active-text-color="#06b799">
       <el-sub-menu index="1">
         <template #title>{{ nickname }}</template>
         <el-menu-item index="1-1" @click="handleLoginOut"
@@ -27,50 +25,54 @@
   </div>
 </template>
 <script lang="ts" setup>
-import { userStore } from '@/store/user';
-import { computed } from 'vue';
-import { useRouter } from 'vue-router';
-import { ElMessage, ElMessageBox } from 'element-plus';
-import { FullScreen } from '@element-plus/icons-vue';
-const store = userStore();
-const nickname = computed(() => store.userInfo.nickname);
-const avatar = computed(() => store.userInfo.avatar);
-const srcList = computed(() => [avatar.value]);
+import { userStore } from '@/store/user'
+import { tabPaneStore } from '@/store/tabPane'
 
-const router = useRouter();
+import { computed } from 'vue'
+import { useRouter } from 'vue-router'
+import { ElMessage, ElMessageBox } from 'element-plus'
+import { FullScreen } from '@element-plus/icons-vue'
+const USER = userStore()
+const TAB_PANE = tabPaneStore()
+
+const nickname = computed(() => USER.userInfo.nickname)
+const avatar = computed(() => USER.userInfo.avatar)
+const srcList = computed(() => [avatar.value])
+
+const router = useRouter()
 
 const toggleFullScreen = () => {
   if (!document.fullscreenElement) {
-    document.documentElement.requestFullscreen();
+    document.documentElement.requestFullscreen()
   } else {
     if (document.exitFullscreen) {
-      document.exitFullscreen();
+      document.exitFullscreen()
     }
   }
-};
+}
 const handleLoginOut = () => {
   ElMessageBox.confirm('确认退出?', '提示', {
     confirmButtonText: '确认',
     cancelButtonText: '取消',
-    type: 'warning',
+    type: 'warning'
   })
     .then(() => {
       ElMessage({
         type: 'success',
-        message: '退出成功',
-      });
+        message: '退出成功'
+      })
       //pinia 数据重置
-      store.$reset();
-
-      router.push('/login');
+      USER.$reset()
+      TAB_PANE.$reset()
+      router.push('/login')
     })
     .catch(() => {
       ElMessage({
         type: 'info',
-        message: '您已取消退出',
-      });
-    });
-};
+        message: '您已取消退出'
+      })
+    })
+}
 </script>
 <style lang="scss" scoped>
 .header-right {
