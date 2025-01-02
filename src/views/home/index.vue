@@ -1,14 +1,12 @@
 <template>
   <div class="home">
     <img :src="home" />
-    
   </div>
 </template>
 
 <script lang="ts" setup>
 import home from '@/assets/home.svg';
 import { userStore } from '@/store/user';
-
 </script>
 
 <style lang="scss" scopde>

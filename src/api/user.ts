@@ -4,7 +4,7 @@ export function loginPath(data: any) {
   return request({
     method: 'POST',
     url: '/bulbasaur/oauth/token',
-    data,
+    data
   });
 }
 // 获取用户信息

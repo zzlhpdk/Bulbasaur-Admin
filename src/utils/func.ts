@@ -31,7 +31,7 @@ export const routerFormat = (routers: any, parentName = 'Bulbasaur') => {
       component:
         item.meta.type !== 'catalogue'
           ? modules[`../views${item.component}/index.vue`]
-          : RouterView,
+          : RouterView
     };
     // 路由表里添加路由  https://router.vuejs.org/zh/guide/essentials/nested-routes.html#%E5%B5%8C%E5%A5%97%E7%9A%84%E5%91%BD%E5%90%8D%E8%B7%AF%E7%94%B1
     router.addRoute(parentName, route);
