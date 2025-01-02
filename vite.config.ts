@@ -2,18 +2,9 @@ import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import vueJsx from '@vitejs/plugin-vue-jsx'; //使用vueJsx插件
 import { resolve } from 'path'; //path模块是node.js内置的功能，但是node.js本身并不支持ts,解决方案：安装@types/node
-import { viteMockServe } from 'vite-plugin-mock'; //mock数据
 
 export default defineConfig({
-  plugins: [
-    vue(),
-    vueJsx(),
-    viteMockServe({
-      // ↓解析根目录下的mock文件夹
-      mockPath: 'src/mock',
-      enable: true
-    })
-  ],
+  plugins: [vue(), vueJsx()],
   resolve: {
     //路径别名
     alias: {
@@ -28,18 +19,17 @@ export default defineConfig({
         prependData: '@use "@/assets/style/element/index.scss" as *;'
       }
     }
-  }
+  },
   //跨域
-  // server: {
-  //   proxy: {
-  //     // 选项写法
-  //     '/api': {
-  //       target:
-  //         'https://www.fastmock.site/mock/725b16b37c152f279e421bd5947d2785/api', //代理目标地址
-  //       changeOrigin: true, //兼容基于名字的虚拟主机，代理服务会把orign修改为目标地址
-  //       //路径重写，把api 替换成空
-  //       rewrite: path => path.replace(/^\/api/, '')
-  //     }
-  //   }
-  // }
+  server: {
+    proxy: {
+      // 选项写法
+      '/api': {
+        target: 'https://apifoxmock.com/m1/5706587-5387781-default/', //代理目标地址
+        changeOrigin: true, //兼容基于名字的虚拟主机，代理服务会把orign修改为目标地址
+        //路径重写，把api 替换成空
+        rewrite: path => path.replace(/^\/api/, '')
+      }
+    }
+  }
 });
