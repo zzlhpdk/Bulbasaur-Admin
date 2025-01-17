@@ -1,10 +1,16 @@
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
-import vueJsx from '@vitejs/plugin-vue-jsx'; //使用vueJsx插件
+import AutoImport from 'unplugin-auto-import/vite';
 import { resolve } from 'path'; //path模块是node.js内置的功能，但是node.js本身并不支持ts,解决方案：安装@types/node
 
 export default defineConfig({
-  plugins: [vue(), vueJsx()],
+  plugins: [
+    vue(),
+    AutoImport({
+      imports: ['vue', 'vue-router', 'pinia'], // 你想要自动导入的库
+      dts: 'types/auto-imports.d.ts' // 自动导入类型定义文件 ./auto-imports.d.ts
+    })
+  ],
   resolve: {
     //路径别名
     alias: {
@@ -15,8 +21,7 @@ export default defineConfig({
   css: {
     preprocessorOptions: {
       scss: {
-        additionalData: '@import "@/styles/common.scss";', //注入common公共样式scss到css里面
-        prependData: '@use "@/assets/style/element/index.scss" as *;'
+        additionalData: '@use "@/styles/variables.scss" as *;' //注入common公共样式scss到css里面
       }
     }
   },

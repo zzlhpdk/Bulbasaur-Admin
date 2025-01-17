@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
+import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'; 
 import Layout from '@/layout/index.vue';
 import NProgress from 'nprogress'; // 进度条
 import 'nprogress/nprogress.css'; // 进度条样式
@@ -18,33 +18,32 @@ const routes: RouteRecordRaw[] = [
         path: 'home',
         name: 'Home',
         component: () => import('@/views/home/index.vue'),
-        meta: { title: '首页' },
+        meta: { title: '首页' }
       },
       {
         path: '/:catchAll(.*)',
         name: 'noPermission',
         meta: { title: '401' },
-        component: () => import('@/views/error-page/401.vue'),
-      },
-    ],
+        component: () => import('@/views/error-page/401.vue')
+      }
+    ]
   },
   {
     path: '/login',
     name: 'login',
     component: () => import('@/views/login/index.vue'),
-    meta: { title: '登录' },
-  },
+    meta: { title: '登录' }
+  }
 ];
 
 const router = createRouter({
   history: createWebHistory(), //路由模式
-  routes,
+  routes
 });
 
 router.beforeEach(async (to, from, next) => {
   NProgress.start();
   const { token, userInfo } = userStore();
-  const componentRoutes = router.options.routes; // 当前组件路由数量
   // 设置页面title
   document.title = (to.meta.title as string) || '妙蛙种子管理系统';
   // 没有登录
@@ -61,6 +60,7 @@ router.beforeEach(async (to, from, next) => {
   }
   // 已经登录
   else {
+    const componentRoutes = router.options.routes; // 当前组件路由数量
     //用户登录了还想去登录页
     if (to.path === '/login') {
       // 发行
@@ -81,7 +81,7 @@ router.beforeEach(async (to, from, next) => {
         tabPaneStore().addTabPanes({
           name: to.name,
           label: to.meta.title,
-          key: to.fullPath,
+          key: to.fullPath
         });
         next();
       }

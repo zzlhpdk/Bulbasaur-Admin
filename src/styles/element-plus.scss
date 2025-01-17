@@ -1,0 +1,11 @@
+@use 'element-plus/dist/index.css' as *;
+@use './variables.scss' as *; //全局公共样式
+
+@forward 'element-plus/theme-chalk/src/common/var.scss' with (
+  $colors: (
+    'primary': (
+      'base': $color
+    )
+  )
+);
+@use 'element-plus/theme-chalk/src/index.scss' as *;

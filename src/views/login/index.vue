@@ -44,57 +44,56 @@
 </template>
 
 <script lang="ts" setup>
-import { reactive, ref, onMounted } from 'vue'
-import { useRouter, useRoute } from 'vue-router' // useRouter实例对象，useRoute当前路由对象
-import { Avatar, Lock } from '@element-plus/icons-vue'
-import type { FormInstance, FormRules } from 'element-plus'
-import { loginPath, userInfoPath } from '@/api/user'
-import { ElMessage } from 'element-plus'
-import { userStore } from '@/store/user'
+import { useRouter, useRoute } from 'vue-router'; // useRouter实例对象，useRoute当前路由对象
+import { Avatar, Lock } from '@element-plus/icons-vue';
+import type { FormInstance, FormRules } from 'element-plus';
+import { loginPath, userInfoPath } from '@/api/user';
+import { ElMessage } from 'element-plus';
+import { userStore } from '@/store/user';
 
-const form = ref<FormInstance>()
-const router = useRouter()
-const route = useRoute()
-const USER = userStore()
+const form = ref<FormInstance>();
+const router = useRouter();
+const route = useRoute();
+const USER = userStore();
 const user = reactive({
   code: import.meta.env.NODE_ENV === 'production' ? '' : 'admin',
   pwd: import.meta.env.NODE_ENV === 'production' ? '' : '123456'
-})
-const loading = ref(false)
+});
+const loading = ref(false);
 const rules = ref<FormRules>({
   code: [{ required: true, message: '请输入账号', trigger: 'blur' }],
   pwd: [{ required: true, message: '请输入密码', trigger: 'blur' }]
-})
+});
 
 // 初始化清空缓存
 onMounted(() => {
-  USER.$reset()
-})
+  USER.$reset();
+});
 const handleSubmit = async () => {
   await form.value?.validate(async valid => {
     if (valid) {
-      loading.value = true
+      loading.value = true;
       const respones: any = await loginPath(user).finally(() => {
-        loading.value = false
-      })
+        loading.value = false;
+      });
       //用 pinia 储存token
-      USER.setToken(respones.data.access_token)
+      USER.setToken(respones.data.access_token);
       // 根据token,请求用户信息
-      getUserInfo()
+      getUserInfo();
     } else {
-      ElMessage.error('必填项不能为空')
+      ElMessage.error('必填项不能为空');
     }
-  })
-}
+  });
+};
 
 // 获取用户信息
 const getUserInfo = async () => {
-  const response = await userInfoPath()
+  const response = await userInfoPath();
   //用 pinia 储存用户信息
-  USER.setUser(response.data)
-  const redirect = (route.query.redirect as string) || '/'
-  router.push(redirect)
-}
+  USER.setUser(response.data);
+  const redirect = (route.query.redirect as string) || '/';
+  router.push(redirect);
+};
 </script>
 
 <style lang="scss" scoped>
