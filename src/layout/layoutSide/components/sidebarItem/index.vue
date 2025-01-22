@@ -1,7 +1,7 @@
 <template>
   <div v-if="item.meta.type !== 'button'">
     <!-- 子菜单index拼接父菜单index  用于点击跳转 -->
-    <el-menu-item :index="`${path}/${item.path}`" v-if="!item.children">
+    <el-menu-item :index="`${item.path}`" v-if="!item.children">
       <el-icon color="#fff" :size="18">
         <component :is="item.meta.icon"></component>
       </el-icon>
@@ -17,8 +17,7 @@
       <sidebarItem
         v-for="child in item.children"
         :item="child"
-        :path="`${path}/${item.path}`"
-      >
+        :path="`${item.path}`">
       </sidebarItem>
     </el-sub-menu>
   </div>
@@ -26,18 +25,18 @@
 <script lang="ts">
 // 使用name 属性用于调用自身
 export default {
-  name: 'sidebarItem',
+  name: 'sidebarItem'
 };
 </script>
 <script lang="ts" setup>
 const { item } = defineProps({
   item: {
     type: Object,
-    required: true,
+    required: true
   },
   path: {
-    type: String,
-  },
+    type: String
+  }
 });
 </script>
 
